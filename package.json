@@ -1,0 +1,39 @@
+{
+  "name": "arg-typecheck",
+  "version": "0.1.0",
+  "description": "A simple type checker for function arguments in JavaScript.",
+  "main": "src/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/mocha -R dot",
+    "lint": "./node_modules/.bin/jshint src/",
+    "doc": "./node_modules/.bin/jsdoc src/ --destination doc/",
+    "cover": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- -u exports -R dot"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benkogan/arg-typecheck.git"
+  },
+  "keywords": [
+    "javascript",
+    "typecheck"
+  ],
+  "author": "Ben Kogan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/benkogan/arg-typecheck/issues"
+  },
+  "homepage": "https://github.com/benkogan/arg-typecheck#readme",
+  "dependencies": {
+    "lodash": "^4.2.1"
+  },
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "istanbul": "^0.4.2",
+    "jsdoc": "^3.4.0",
+    "jshint": "^2.9.1",
+    "mocha": "^2.2.5"
+  }
+}
