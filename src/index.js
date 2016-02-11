@@ -1,5 +1,6 @@
 var _ = require('lodash/lang');
 _.zipWith = require('lodash/zipWith');
+_.attempt = require('lodash/attempt');
 
 var type = require('./type');
 var TypeCheckError = require('./TypeCheckError');
@@ -10,16 +11,20 @@ module.exports = {
 };
 
 function typecheck(argObj, pType) {
-  var name = getName(argObj.callee);
+  var name = getName(argObj);
   var args = Array.prototype.slice.call(argObj);
   var result = check(name, args, pType);
   if (result.correct === false) throw result;
   else return result;
 }
 
-function getName(callee) {
-  // since arguments.callee.name is not in all js implementations
-  return callee.name || callee.toString().match(/function\s+([^\s\(]+)/)[1];
+function getName(argObj) {
+  // attempt is used since strict mode will throw on `arguments.callee` access
+  var n = _.attempt(function () {
+    // since arguments.callee.name is not in all js implementations
+    return argObj.callee.name || argObj.callee.toString().match(/function\s+([^\s\(]+)/)[1];
+  });
+  return _.isError(n) ? 'function' : n;
 }
 
 function check(name, args, pType) {

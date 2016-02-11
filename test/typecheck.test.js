@@ -3,6 +3,14 @@ var typecheck = require('../src').typecheck;
 var t = require('../src').types;
 
 describe('typeCheck', () => {
+  describe('in a "use strict" context', () => {
+    function fn() { 'use strict'; typecheck(arguments, []); }
+
+    it('should not throw an error on invocation', () => {
+      expect(() => fn()).to.not.throw();
+    });
+  });
+
   describe('fn()', () => {
     function fn () { typecheck(arguments, []); }
 
